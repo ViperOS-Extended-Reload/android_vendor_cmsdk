@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2015, The CyanogenMod Project
+ * Copyright (C) 2015-2016 The CyanogenMod Project
+ * Copyright (C) 2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1609,6 +1610,17 @@ public final class CMSettings {
         public static final Validator STATUS_BAR_BRIGHTNESS_CONTROL_VALIDATOR =
                 sBooleanValidator;
 
+
+        /**
+         * Whether to enable burnin protection
+         0 = 0ff, 1 = on
+         */
+        public static final String SYSTEMUI_BURNIN_PROTECTION = "systemui_burnin_protection";
+
+        /** @hide */
+        public static final Validator SYSTEMUI_BURNIN_PROTECTION_VALIDATOR =
+                sBooleanValidator;
+
         /**
          * Whether or not volume button music controls should be enabled to seek media tracks
          * 0 = 0ff, 1 = on
@@ -2141,6 +2153,7 @@ public final class CMSettings {
             VALIDATORS.put(QS_SHOW_BRIGHTNESS_SLIDER, QS_SHOW_BRIGHTNESS_SLIDER_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_BRIGHTNESS_CONTROL,
                     STATUS_BAR_BRIGHTNESS_CONTROL_VALIDATOR);
+            VALIDATORS.put(SYSTEMUI_BURNIN_PROTECTION, SYSTEMUI_BURNIN_PROTECTION_VALIDATOR);
             VALIDATORS.put(VOLBTN_MUSIC_CONTROLS, VOLBTN_MUSIC_CONTROLS_VALIDATOR);
             VALIDATORS.put(USE_EDGE_SERVICE_FOR_GESTURES,
                     USE_EDGE_SERVICE_FOR_GESTURES_VALIDATOR);
@@ -2925,6 +2938,47 @@ public final class CMSettings {
          */
         public static final String LOCK_SCREEN_WEATHER_ENABLED = "lock_screen_weather_enabled";
 
+        /**
+         * Network traffic indicator mode
+         * 0 = Don't show network traffic indicator
+         * 1 = Display up-stream traffic only
+         * 2 = Display down-stream traffic only
+         * 3 = Display both up- and down-stream traffic
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_MODE = "network_traffic_mode";
+
+        /** @hide */
+        public static final Validator NETWORK_TRAFFIC_MODE_VALIDATOR =
+                new InclusiveIntegerRangeValidator(0, 3);
+
+        /**
+         * Whether or not to hide the network traffic indicator when there is no activity
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_AUTOHIDE = "network_traffic_autohide";
+
+        /** @hide */
+        public static final Validator NETWORK_TRAFFIC_AUTOHIDE_VALIDATOR = sBooleanValidator;
+
+        /**
+         * Measurement unit preference for network traffic
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_UNITS = "network_traffic_units";
+
+        /** @hide */
+        public static final Validator NETWORK_TRAFFIC_UNITS_VALIDATOR =
+                new InclusiveIntegerRangeValidator(0, 3);
+
+        /**
+         * Whether or not to show measurement units in the network traffic indiciator
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_SHOW_UNITS = "network_traffic_show_units";
+
+        /** @hide */
+        public static final Validator NETWORK_TRAFFIC_SHOW_UNITS_VALIDATOR = sBooleanValidator;
 
         // endregion
 
@@ -3036,6 +3090,10 @@ public final class CMSettings {
         static {
             VALIDATORS.put(PROTECTED_COMPONENTS, PROTECTED_COMPONENTS_VALIDATOR);
             VALIDATORS.put(PROTECTED_COMPONENT_MANAGERS, PROTECTED_COMPONENTS_MANAGER_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_MODE, NETWORK_TRAFFIC_MODE_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_AUTOHIDE, NETWORK_TRAFFIC_AUTOHIDE_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_UNITS, NETWORK_TRAFFIC_UNITS_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_SHOW_UNITS, NETWORK_TRAFFIC_SHOW_UNITS_VALIDATOR);
         }
 
         /**
